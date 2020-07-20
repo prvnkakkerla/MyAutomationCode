@@ -19,11 +19,10 @@ public class DeckopayLogin extends TestBase
 {
 	//public static WebDriver driver= null;
 	
-	
-	@Test 
+	@Test (priority=2)
 	public void loginTest() throws IOException {
 		
-		/* The below  simple code to understand the flow of the test
+		/*The below  simple code to understand the flow of the test
 		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "//chromedriver//chromedriver.exe");
 		 driver= new ChromeDriver();
 		 driver.get("https://release.dekopay.org/backoffice/v2/#/");
@@ -34,18 +33,36 @@ public class DeckopayLogin extends TestBase
 				 */
 		
 		/* The below  code is developed as a framework please refer to TestBase calss to see how URL, locators,test data is passed to test*/
-
+		
 		initialize();
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
 		driver.get(Config.getProperty("deckopayURL"));
+		getobject("usernameXpath").clear();
 		getobject("usernameXpath").sendKeys(getdata("username"));
 		getobject("passwordXpath").sendKeys(getdata("password"));
 		getobject("SigninButtonXpath").click();
 		
 		String loggedinUsername=getobject("loggedinUserXpath").getText();
 		Assert.assertEquals(loggedinUsername, "Praveen");
+		driver.quit();
 		}
 		
+	/* this test is for failed login script executes failed login first and then successful login test*/
+	@Test(priority=1)
+	public void failedlogin() throws IOException {
+		initialize();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
+		driver.get(Config.getProperty("deckopayURL"));
+		getobject("usernameXpath").sendKeys(getdata("username"));
+		getobject("passwordXpath").sendKeys(getdata("incorrectpassword"));
+		getobject("SigninButtonXpath").click();
+		
+		String errormessage=getobject("errormessage").getText();
+		Assert.assertEquals(errormessage, "Sorry, the details you provided were incorrect.");
+		
+		
+	}
 }

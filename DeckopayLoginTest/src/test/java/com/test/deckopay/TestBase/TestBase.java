@@ -46,7 +46,7 @@ public class TestBase {
 	ip = new FileInputStream(System.getProperty("user.dir")+ "\\src\\test\\java\\com\\test\\deckopay\\properties\\Testdata.properties");
 	data.load(ip);	
 	
-	
+	isInitialized=true;
 	}
 	
 	
