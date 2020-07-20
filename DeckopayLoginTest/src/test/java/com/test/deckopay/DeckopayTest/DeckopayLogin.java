@@ -19,10 +19,11 @@ public class DeckopayLogin extends TestBase
 {
 	//public static WebDriver driver= null;
 	
+	
 	@Test 
 	public void loginTest() throws IOException {
 		
-		/* simple code to understand the flow of the test
+		/* The below  simple code to understand the flow of the test
 		System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "//chromedriver//chromedriver.exe");
 		 driver= new ChromeDriver();
 		 driver.get("https://release.dekopay.org/backoffice/v2/#/");
@@ -32,6 +33,8 @@ public class DeckopayLogin extends TestBase
 				 
 				 */
 		
+		/* The below  code is developed as a framework please refer to TestBase calss to see how URL, locators,test data is passed to test*/
+
 		initialize();
 		
 		driver.manage().window().maximize();
