@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.test.deckopay.TestBase.TestBase;
@@ -19,7 +21,14 @@ public class DeckopayLogin extends TestBase
 {
 	//public static WebDriver driver= null;
 	
+	@BeforeTest
+	public void gotosite() throws IOException {
+		initialize();
+		driver.get(Config.getProperty("deckopayURL"));
+	}
+	
 	@Test (priority=2)
+	
 	public void loginTest() throws IOException {
 		
 		/*The below  simple code to understand the flow of the test
@@ -34,11 +43,7 @@ public class DeckopayLogin extends TestBase
 		
 		/* The below  code is developed as a framework please refer to TestBase calss to see how URL, locators,test data is passed to test*/
 		
-		initialize();
 		
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
-		driver.get(Config.getProperty("deckopayURL"));
 		getobject("usernameXpath").clear();
 		getobject("usernameXpath").sendKeys(getdata("username"));
 		getobject("passwordXpath").sendKeys(getdata("password"));
@@ -46,23 +51,28 @@ public class DeckopayLogin extends TestBase
 		
 		String loggedinUsername=getobject("loggedinUserXpath").getText();
 		Assert.assertEquals(loggedinUsername, "Praveen");
-		driver.quit();
+		
 		}
 		
 	/* this test is for failed login script executes failed login first and then successful login test*/
 	@Test(priority=1)
-	public void failedlogin() throws IOException {
-		initialize();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
-		driver.get(Config.getProperty("deckopayURL"));
+	public void failedlogin() throws IOException, InterruptedException {
+		
+		
+		
 		getobject("usernameXpath").sendKeys(getdata("username"));
 		getobject("passwordXpath").sendKeys(getdata("incorrectpassword"));
 		getobject("SigninButtonXpath").click();
-		
+		Thread.sleep(2000L);
 		String errormessage=getobject("errormessage").getText();
 		Assert.assertEquals(errormessage, "Sorry, the details you provided were incorrect.");
 		
 		
+	}
+	
+	@AfterTest
+	public void closebrowser()
+	{
+		driver.quit();
 	}
 }

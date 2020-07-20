@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +36,8 @@ public class TestBase {
 	System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "//chromedriver//chromedriver.exe");		
 	
 	     driver= new ChromeDriver();		
+	     driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(60L, TimeUnit.SECONDS);
 			 	
 	Config = new Properties();
 	FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+ "\\src\\test\\java\\com\\test\\deckopay\\properties\\CONFIG.properties");
