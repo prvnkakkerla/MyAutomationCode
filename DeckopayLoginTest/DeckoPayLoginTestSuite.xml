@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="DeckoPaySuite">
+
+
+
+
+<test name="DeckoPayLogin">
+    <classes>        
+                 
+        
+           <class name="com.test.deckopay.DeckopayTest.DeckopayLogin" ></class>            
+         
+    </classes>  
+    
+</test>
+</suite>

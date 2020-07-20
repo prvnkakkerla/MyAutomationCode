@@ -1,0 +1,10 @@
+To run tests
+Import the project into eclispse
+
+option 1: go to src/test/java/com.test.deckopay.DeckopayTest
+          Open DeckopayLogin.java
+          Right click and run as testNGtest.
+          
+Option 2:: Right click on  DeckoPayLoginTestSuite.xml and run as testNGSuite
+
+Option 3:: Right click on pom.xml and run as Maventest
